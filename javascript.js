@@ -1,7 +1,4 @@
-let todo1 = 'Get groceries';
-let todo2 = 'Wash car';
-let todo3 = 'Make dinner';
-
+// Model
 let todos = [{
     title: 'Get groceries',
     dueDate: '2021-10-04',
@@ -16,6 +13,31 @@ let todos = [{
     id: 'id3'
 }];
 
+// Creates a todo
+function createTodo(title, dueDate) {
+    const id = '' + new Date().getTime();
+
+    todos.push({
+        title: title,
+        dueDate: dueDate,
+        id: id
+    });
+}
+
+// Deletes a todo
+function removeTodo(idToDelete) {
+    todos = todos.filter(function (todo) {
+        // If the id of this todo matches idToDelete, return false
+        // For everything else, return true
+
+        if (todo.id === idToDelete) {
+            return false;
+        } else {
+            return true;
+        }
+    });
+}
+
 function addTodo() {
     // Todo list
     const textbox = document.getElementById('todo-title');
@@ -25,40 +47,20 @@ function addTodo() {
     const datePicker = document.getElementById('date-picker');
     const dueDate = datePicker.value;
 
-    const id = new Date().getTime();
-
-    todos.push({
-        title: title,
-        dueDate: dueDate,
-        id: id
-    });
-
-
+    createTodo(title, dueDate);
     render();
 }
 
-function func() {
-    return 100;
-}
-
+// Controller
 function deleteTodo(event) {
     const deleteButton = event.target;
     const idToDelete = deleteButton.id;
 
-    todos.filter(function (todo) {
-        return false;
-    }
-)}
+    removeTodo(idToDelete);
+    render();
+}
 
-/* 
-1 < 5   => true
-1 > 5   => false
-1 === 5    => false
-1 !== 5    => true
-1 >= 5  => false
-1 <= 5  => true
-*/
-
+// Vieuw
 function render() {
     // reset our list
     document.getElementById('todo-list').innerHTML = '';
@@ -78,3 +80,12 @@ function render() {
         todoList.appendChild(element);
     });
 }
+
+/* 
+1 < 5   => true
+1 > 5   => false 
+1 === 5    => false (is this value equal to another value)
+1 !== 5    => true (this one means is it not equel to)
+1 >= 5  => false (this one means greater than or equal to)
+1 <= 5  => true
+*/
