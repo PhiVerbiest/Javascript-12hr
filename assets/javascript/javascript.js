@@ -89,3 +89,5 @@ function render() {
 1 >= 5  => false (this one means greater than or equal to)
 1 <= 5  => true
 */
+
+render();
